@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { PoetryModel } = require("../model/index")
+const { PoetryModel, UserModel } = require("../model/index")
 router.get("/", (req, res) => {
     res.send("Hello from Poetry")
 })
@@ -76,8 +76,23 @@ router.patch("/addlike/:_id", async (req, res) => {
                 likes: req.body.uid
             }
         },{new:true});
-        res.json(AddLike);
+
+        const AddLikeInToLiker = await UserModel.findOneAndUpdate({ uid: req.body.uid }, {
+            $push: {
+                liked: req.params._id
+            }
+        }, { new: true });
+
+        res.json({
+            success: true,
+            message: "Liked id Successfully added in user side ",
+            PoetryData:AddLike,
+            UserLikedData:AddLikeInToLiker
+
+        });
+
     } catch (error) {
+        console.log(error.message);
         res.status(500).json({ "Doesn't Able to Add Like ": error });
     }
 });

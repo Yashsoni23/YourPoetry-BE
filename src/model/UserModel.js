@@ -18,7 +18,7 @@ const UserSchema = new Schema({
     },
     followers: Array,
     following: Array,
-
+    liked: Array
 });
 
 const UserModel = models.UserSchema || model('UserSchema', UserSchema);

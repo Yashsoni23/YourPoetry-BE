@@ -100,6 +100,27 @@ router.patch("/follow/:uid", async (req, res) => {
     }
 })
 
+router.patch("/liked/:_id", async (req, res) => {
+    try {
+
+        const AddLikeInToLiker = await UserModel.findOneAndUpdate({ uid: req.body.uid }, {
+            $push: {
+                liked: req.params._id
+            }
+        }, { new: true });
+
+     
+        res.json({
+            success: true,
+            message: "Liked id Successfully added in user side "
+        });
+
+
+    } catch (error) {
+        console.log(`error from user side ${error}`)
+
+    }
+})
 
 
 router.patch("/unfollow/:uid", async (req, res) => {
@@ -128,7 +149,7 @@ router.patch("/unfollow/:uid", async (req, res) => {
         console.log(`error from user side ${error}`)
 
     }
-})
+});
 
 
 

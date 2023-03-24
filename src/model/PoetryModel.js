@@ -24,6 +24,7 @@ const PoetrySchema = new Schema({
         type: String,
         required: true,
     },
+    bio: String,
     likes:  Array, 
 });
 
