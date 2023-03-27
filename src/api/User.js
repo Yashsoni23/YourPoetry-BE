@@ -24,6 +24,30 @@ router.get("/lookuser/:_id", async (req, res) => {
 
     }
 })
+
+router.get("/lookuser", async (req, res) => {
+    try {
+        const FindUserByEmail = await UserModel.find({ email: req.query.email });
+        if(FindUserByEmail<=0 ){
+            return res.json({
+                statusCode:404,
+                message:"User Not Found",
+                data:FindUserByEmail
+            })
+        }
+            return  res.json({
+                statusCode:200,
+                message:"User found Successfull",
+                data:FindUserByEmail
+            })
+        
+       
+    } catch (error) {
+        console.log(`error from user side ${error}`)
+
+    }
+})
+
 router.get("/searchuser", async (req, res) => {
     try {
 
@@ -99,8 +123,8 @@ router.patch("/follow/:uid", async (req, res) => {
 
     }
 })
-
-router.patch("/liked/:_id", async (req, res) => {
+// Pending
+router.get("/liked/:_id", async (req, res) => {
     try {
 
         const AddLikeInToLiker = await UserModel.findOneAndUpdate({ uid: req.body.uid }, {

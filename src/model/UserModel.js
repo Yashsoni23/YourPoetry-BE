@@ -16,6 +16,11 @@ const UserSchema = new Schema({
         type:String,
         isNull:true
     },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
     followers: Array,
     following: Array,
     liked: Array

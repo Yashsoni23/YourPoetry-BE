@@ -24,6 +24,10 @@ path: "/user/lookuser/:_id",
 method: GET,
 intent: for getting specified existing user,
 
+path: "/user/lookuser?email='value'",
+method: GET,
+intent: for getting specified existing user by email,
+
 path: "/user/searchuser",
 method: GET,
 intent: for searching all existing users from name starting with query params,
